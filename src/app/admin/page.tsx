@@ -1,8 +1,13 @@
+import { AdminSidebar } from "@/components/Admin-sidebar";
+import { ToggleGroupDemo } from "@/components/Category";
+
  const Header = () => {
     return (
-        <div className="w-10 h-10 bg-white">
-            <input type="file" />
-            <button>upload</button>
+        <div className="flex bg-[#E4E4E7]">
+            <AdminSidebar />
+            <div className="w-full ">
+                <ToggleGroupDemo />
+            </div>
         </div>
     )
 }

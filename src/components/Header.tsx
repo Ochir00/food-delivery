@@ -13,10 +13,10 @@ export const Header = () => {
         />
         <div>
           <p className="text-xl">
-            <span>Nom</span>
+            <span className="text-white">Nom</span>
             <span className="text-red-500">Nom</span>
           </p>
-          <p>Swift delivery</p>
+          <p className="text-white">Swift delivery</p>
         </div>
       </div>
 
@@ -33,12 +33,12 @@ export const Header = () => {
 };
 export const Footer = () => {
   return (
-    <div className="w-full h-[755px]">
+    <div className="w-full h-[755px] bg-[#18181B] pt-8">
       <div className="w-full h-[92px] bg-red-500 flex justify-between items-center">
         <p className="font-semibold text-[30px]">Fresh fast delivered </p>
       </div>
       <div className="max-w-[80%] m-auto mt-[100px]">
-        <div className="w-full flex ">
+        <div className="w-full flex justify-between mb-[100px]">
           <div className="flex flex-col  items-center">
             <Image
               className="w-[46px] h-[37px]"
@@ -49,10 +49,10 @@ export const Footer = () => {
             />
             <div>
               <p className="text-xl">
-                <span>Nom</span>
+                <span className="text-white">Nom</span>
                 <span className="text-red-500">Nom</span>
               </p>
-              <p>Swift delivery</p>
+              <p className="text-white">Swift delivery</p>
             </div>
           </div>
           <div>
@@ -70,7 +70,7 @@ export const Footer = () => {
             <p className="text-[16px] text-[#FAFAFA]">Main dishes</p>
           </div>
           <div>
-            <p className="text-[#71717A] text-[16px] pb-2"> </p>
+            <p className="text-[#71717A] text-[16px] pb-2">...</p>
             <p className="text-[16px] text-[#FAFAFA]">Side dish </p>
             <p className="text-[16px] text-[#FAFAFA]">Brunch</p>
             <p className="text-[16px] text-[#FAFAFA]">Desserts</p>
@@ -83,7 +83,7 @@ export const Footer = () => {
             <Image src={"facebook.png"} width={1000} height={1000} alt="facebook"/> */}
           </div>
         </div>
-        <div className="w-full flex gap-10 border-t-2 border-gray-500/40 py-10">
+        <div className="w-full flex gap-10 border-t-2 border-gray-500/40 py-10 text-gray-600">
               <p>Copy right 2025 © Nomnom LLC</p>
               <p>Privacy policy</p>
               <p>Terms and conditoin</p>
