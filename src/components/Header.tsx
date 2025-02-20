@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export const Header = () => {
   return (
@@ -21,9 +22,12 @@ export const Header = () => {
       </div>
 
       <div className="flex gap-3">
+        <Link href={"/Register"}>
         <button className="px-[12px] py-[8px] bg-white rounded-full text-black">
           Sing up
         </button>
+        </Link>
+        
         <button className="px-[12px] py-[8px] bg-red-500 rounded-full text-white">
           Log in
         </button>
@@ -33,7 +37,7 @@ export const Header = () => {
 };
 export const Footer = () => {
   return (
-    <div className="w-full h-[755px] bg-[#18181B] pt-8">
+    <div className="w-full h-[755px] bg-[#18181B] ">
       <div className="w-full h-[92px] bg-red-500 flex justify-between items-center">
         <p className="font-semibold text-[30px]">Fresh fast delivered </p>
       </div>
