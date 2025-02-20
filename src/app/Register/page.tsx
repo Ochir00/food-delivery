@@ -1,9 +1,21 @@
+import { RegisterEmail, RegisterNext } from "@/components/Register";
+
 const Register = () => {
-    return (
-        <div>
-            <p>ha</p>
-        </div>
-    );
+  return (
+    <div>
+      <RegisterNext />
+      <RegisterEmail />
+    </div>
+  );
 };
 
 export default Register;
+
+//gmail
+
+// password
+// confirm password
+
+// login
+// gmail
+// pssword
