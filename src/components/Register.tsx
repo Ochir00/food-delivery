@@ -19,6 +19,8 @@ import { ChevronLeft } from "lucide-react";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
+  password: z.string().min(6).max(15),
+  confirm: z.string().min(6).max(15),
 });
 //
 //
@@ -85,17 +87,18 @@ export const RegisterEmail = () => {
 //
 //
 //
-
 export const RegisterPassword = () => {
+
+  const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      password: "",
+      confirm: "",
     },
   });
-  const [password, setPassword] = useState("");
-  const [confirm, setconfirm] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+
 
   // Function to toggle the visibility of the password
   const handleCheckboxChange = (event: any) => {
@@ -120,7 +123,7 @@ export const RegisterPassword = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
-            name="username"
+            name="password"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
@@ -130,20 +133,27 @@ export const RegisterPassword = () => {
                     className="w-[416px] h-[36px] px-3 py-2 border-gray-300"
                   />
                 </FormControl>
+                <FormControl></FormControl>
+                <FormControl></FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="confirm"
+            render={({ field }) => (
+              <FormItem>
                 <FormControl>
                   <Input
-                    placeholder="Confirm"
+                    placeholder="Password"
                     {...field}
                     className="w-[416px] h-[36px] px-3 py-2 border-gray-300"
                   />
                 </FormControl>
+                <FormControl></FormControl>
                 <FormControl>
-                <input
-                  type="checkbox"
-                  checked={showPassword}
-                  onChange={handleCheckboxChange}
-                  aria-label="Show password"
-                />
+
                 </FormControl>
                 <FormMessage />
               </FormItem>
