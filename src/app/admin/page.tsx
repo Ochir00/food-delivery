@@ -1,6 +1,6 @@
 
 import { AdminSidebar } from "@/components/Admin-sidebar";
-import { ToggleGroupDemo } from "@/components/Category";
+import { Foodplus, ToggleGroupDemo } from "@/components/Category";
 
  const Header = () => {
     return (
@@ -8,6 +8,7 @@ import { ToggleGroupDemo } from "@/components/Category";
             <AdminSidebar />
             <div className="w-full ">
                 <ToggleGroupDemo />
+                <Foodplus />
             </div>
         </div>
     )

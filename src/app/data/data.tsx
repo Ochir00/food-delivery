@@ -10,13 +10,18 @@ const array = [
     "Desserts",
     "Beverages",
   ];
-  export default array;
+  // arraw.food[0].name
   const arrawahahy = [
     {
         id:"Appetizers",
         food : [
             {
                 name: "Sunshine Stackers ",
+                price: "13$",
+                description: "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar."
+            },
+            {
+                name: "Sunshasdine Stackers ",
                 price: "13$",
                 description: "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar."
             },
@@ -49,4 +54,5 @@ const array = [
     {
         id:"Beverages",
     },
-  ];
+  ];  
+  export default arrawahahy;
