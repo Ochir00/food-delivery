@@ -15,7 +15,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
-
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 type gategorytype = {
   categoryName: string;
   createdAt: Date;
@@ -73,12 +78,20 @@ export function ToggleGroupDemo() {
       <div>
         <div className=" flex gap-3 flex-wrap">
           {gategory?.map((proms: gategorytype, index: number) => (
-            <div
-              key={index}
-              className="flex items-center h-[36px] text-black px-2 rounded-full border-[#EF4444] border-[1px]"
-            >
-              <p>{proms.categoryName}</p>
-            </div>
+            <ContextMenu>
+              <ContextMenuTrigger className="">
+                <button
+                  className="flex items-center h-[36px] text-black px-2 rounded-full border-[#EF4444] border-[1px]"
+                  key={index}
+                >
+                  <p>{proms.categoryName}</p>
+                </button>
+              </ContextMenuTrigger>
+              <ContextMenuContent className="w-64">
+                <ContextMenuItem inset>Edit</ContextMenuItem>
+                <ContextMenuItem inset>Delete</ContextMenuItem>
+              </ContextMenuContent>
+            </ContextMenu>
           ))}
           <Dialog open={theme} onOpenChange={webmode}>
             <DialogTrigger asChild>
