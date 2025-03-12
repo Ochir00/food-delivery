@@ -26,7 +26,6 @@ export const UserCategories = () => {
       <div className="w-full">
         <h2 className="text-[30px] text-white font-semibold">Categories</h2>
         <Carousel>
-
           <CarouselContent className="ml-2">
             {array.map((proms, index) => {
               return <CarouselItem className="basis-13 text-[18px] font-normal px-5 py-1 rounded-full bg-white mr-2" key={index}>{proms}</CarouselItem>;

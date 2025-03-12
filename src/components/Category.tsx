@@ -18,35 +18,74 @@ import { useEffect, useState } from "react";
 
 type gategorytype = {
   categoryName: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
+// const response = await fetch("http://localhost:8000/food-category", {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   body: JSON.stringify({ categoryName: "DRINKS" }),
+// });
+
 export function ToggleGroupDemo() {
-  const [gategory, setgategory] = useState<object[]>();
+  const [gategory, setgategory] = useState<gategorytype[]>();
+  const [createGategory, setCreateGategory] = useState("");
+  const [theme, setTheme] = useState(false);
+
+  const getcategoty = async () => {
+    const gategorydatas = await fetch(`http://localhost:4000/foodcategories`);
+    const gategorydata = await gategorydatas.json();
+    setgategory(gategorydata);
+  };
+
   useEffect(() => {
-    const getcategoty = async () => {
-      const gategorydatas = await fetch(`http://localhost:4000/foodcategories`);
-      const gategorydata = await gategorydatas.json();
-      setgategory(gategorydata);
-    };
     getcategoty();
   }, []);
-  console.log(gategory);
+
+  const createCategory = async () => {
+    const response = await fetch("http://localhost:4000/foodcategories", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ categoryName: createGategory }),
+    });
+    //Dialogoo end haana uuu
+    //Nemsen datagaa avchirnuuu
+    webmode();
+    getcategoty();
+  };
+
+  const handleChange = (e: any) => {
+    const { value } = e.target;
+    setCreateGategory(value);
+  };
+
+  function webmode() {
+    setTheme(theme == true ? false : true);
+    console.log("working");
+  }
   return (
     <div className="w-full p-5 bg-white m-5 rounded-lg">
       <h2>Dishes category</h2>
       <div>
         <div className=" flex gap-3 flex-wrap">
-          {gategory?.map((proms: gategorytype) => {
-            return (
-              <div className="flex items-center h-[36px] text-black px-2 rounded-full border-[#EF4444] border-[1px]">
-                <p>{proms.categoryName}</p>
-              </div>
-            );
-          })}
-          <Dialog>
+          {gategory?.map((proms: gategorytype, index: number) => (
+            <div
+              key={index}
+              className="flex items-center h-[36px] text-black px-2 rounded-full border-[#EF4444] border-[1px]"
+            >
+              <p>{proms.categoryName}</p>
+            </div>
+          ))}
+          <Dialog open={theme} onOpenChange={webmode}>
             <DialogTrigger asChild>
-              <div className="w-9 h-9 flex items-center rounded-full bg-[#EF4444] justify-center">
+              <div
+                className="w-9 h-9 flex items-center rounded-full bg-[#EF4444] justify-center"
+                onClick={webmode}
+              >
                 <Plus color="white" size={16} />
               </div>
             </DialogTrigger>
@@ -56,12 +95,16 @@ export function ToggleGroupDemo() {
               </DialogHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid-cols-4 items-center gap-4">
-                  <Label htmlFor="username">Gategory Name</Label>
-                  <Input id="username" className="col-span-3" />
+                  <Label htmlFor="username">Category Name</Label>
+                  <Input
+                    onChange={handleChange}
+                    id="username"
+                    className="col-span-3"
+                  />
                 </div>
               </div>
               <DialogFooter>
-                <Button type="submit">Add Gategory</Button>
+                <Button onClick={createCategory}>Add Gategory</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
