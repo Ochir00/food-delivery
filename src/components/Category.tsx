@@ -22,6 +22,7 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 type gategorytype = {
+  _id: string;
   categoryName: string;
   createdAt: Date;
   updatedAt: Date;
@@ -70,8 +71,17 @@ export function ToggleGroupDemo() {
 
   function webmode() {
     setTheme(theme == true ? false : true);
-    console.log("working");
   }
+  const deletecategory = async (proms: gategorytype) => {
+    console.log(proms._id);
+    const response = await fetch(
+      `http://localhost:4000/foodcategories/${proms._id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    getcategoty();
+  };
   return (
     <div className="w-full p-5 bg-white m-5 rounded-lg">
       <h2>Dishes category</h2>
@@ -88,8 +98,17 @@ export function ToggleGroupDemo() {
                 </button>
               </ContextMenuTrigger>
               <ContextMenuContent className="w-64">
-                <ContextMenuItem inset>Edit</ContextMenuItem>
-                <ContextMenuItem inset>Delete</ContextMenuItem>
+                <ContextMenuItem inset disabled>
+                  Edit
+                </ContextMenuItem>
+                <ContextMenuItem
+                  inset
+                  onClick={() => {
+                    deletecategory(proms);
+                  }}
+                >
+                  Delete
+                </ContextMenuItem>
               </ContextMenuContent>
             </ContextMenu>
           ))}
@@ -126,6 +145,7 @@ export function ToggleGroupDemo() {
     </div>
   );
 }
+
 export function Foodplus() {
   return (
     <div>
