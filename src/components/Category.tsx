@@ -241,9 +241,8 @@ export function Foodplus() {
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
-              {food?.map((promss: foodtype, index: number) => {
+              {food?.filter((food)=> food.category === proms ).map((promss: foodtype, index: number) => {
                 return (
-                  
                   <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap">
                     <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ">
                       <Image
