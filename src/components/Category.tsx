@@ -27,6 +27,16 @@ type gategorytype = {
   createdAt: Date;
   updatedAt: Date;
 };
+type foodtype = gategorytype & {
+  _id: string;
+  price: number;
+  image: string;
+  ingredients: string;
+  category: object;
+  foodName: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
 // const response = await fetch("http://localhost:8000/food-category", {
 //   method: "POST",
 //   headers: {
@@ -147,14 +157,50 @@ export function ToggleGroupDemo() {
 }
 
 export function Foodplus() {
+  const [food, setfood] = useState<foodtype[]>();
+  const [gategory, setgategory] = useState<gategorytype[]>();
+  const [createfood, setcreatefood] = useState();
+  const [theme, setTheme] = useState(false);
+  const handleChange = (e: any) => {
+    const { value } = e.target;
+    setcreatefood(value);
+  };
+  const getcategoty = async () => {
+    const gategorydatas = await fetch(`http://localhost:4000/foodcategories`);
+    const gategorydata = await gategorydatas.json();
+    setgategory(gategorydata);
+  };
+  const getfood = async () => {
+    const fooddata = await fetch(`http://localhost:4000/food`);
+    const foodsdata = await fooddata.json();
+    setfood(foodsdata);
+    console.log(foodsdata);
+  };
+  const createCategory = async () => {
+    const response = await fetch("http://localhost:4000/foodcategories", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ categoryName: createfood }),
+    });
+    //Dialogoo end haana uuu
+    //Nemsen datagaa avchirnuuu
+  };
+  function webmode() {
+    setTheme(theme == true ? false : true);
+  }
+  useEffect(() => {
+    getcategoty();
+    getfood();
+  }, []);
   return (
     <div>
-      {arrawahahy.map((proms, index) => {
-        console.log(proms.food?.[0]?.name);
+      {gategory?.map((proms, index) => {
         return (
           <div className="w-full p-5 bg-white m-5 rounded-lg" key={index}>
             <p className="text-black">
-              {proms.id} {proms.food?.length}
+              {proms.categoryName} {gategory?.length}
             </p>
             <div className="flex flex-wrap">
               <Dialog>
@@ -195,21 +241,24 @@ export function Foodplus() {
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
-              {proms.food?.map((promss, index) => {
+              {food?.map((promss: foodtype, index: number) => {
                 return (
-                  <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ">
-                    <Image
-                      src={"/Food1.png"}
-                      width={1000}
-                      height={1000}
-                      alt="food"
-                      className="w-[238px] h-[129px] mx-auto rounded-[12px]"
-                    />
-                    <p>{promss.name}</p>
-                    <p>{promss.description}</p>
-                    <p>{promss.price}</p>
+                  
+                  <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap">
+                    <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ">
+                      <Image
+                        src={"/Food1.png"}
+                        width={1000}
+                        height={1000}
+                        alt="food"
+                        className="w-[238px] h-[129px] mx-auto rounded-[12px]"
+                      />
+                      <p>{promss.foodName}</p>
+                      <p>{promss.price}</p>
+                      <p>{promss.ingredients}</p>
+                    </div>
                   </div>
-                );
+                )
               })}
             </div>
           </div>
