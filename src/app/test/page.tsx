@@ -1,117 +1,48 @@
-import {
-  ContextMenu,
-  ContextMenuCheckboxItem,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuLabel,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
-  ContextMenuSeparator,
-  ContextMenuShortcut,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+"use client";
+import { use, useState } from "react";
 
-export default function ContextMenuDemo() {
+export default  function ContextMenuDemo() {
+  const [infile, setfile] = useState();
+  const [image, setimage] = useState()
+  const PRESET_NAME = "food-delovery";
+  const CLOUDINARYNAME = "dkrwlhgyv";
+  const handlefile = (e: any) => {
+    const file = e.target.files[0];
+    console.log(e.target.files[0])
+    if (file) {
+      setfile(file);
+    }
+
+  };
+  const upload = async () => {
+    if (!infile) {
+      alert("yuch alga");
+    }
+    try {
+      const formdata = new FormData();
+      formdata.append("file", infile);
+      formdata.append("upload_preset", PRESET_NAME);
+      formdata.append("api_key", CLOUDINARYNAME);
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARYNAME}/upload`,
+        {
+          method: "POST",
+          body: formdata,
+        }
+      );
+      const data = await res.json();
+      console.log(data.secure_url);
+      setimage(data.secure_url)
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <ContextMenu>
-      <ContextMenuTrigger className="">
-        <button className="flex items-center h-[36px] text-black px-2 rounded-full border-[#EF4444] border-[1px]">
-          <p>123</p>
-        </button>
-      </ContextMenuTrigger>
-      <ContextMenuContent className="w-64">
-        <ContextMenuItem inset>Edit</ContextMenuItem>
-
-        <Dialog>
-          <DialogTrigger asChild>
-            <ContextMenuItem inset>Delete</ContextMenuItem>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you're done.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
-                </Label>
-                <Input id="name" value="Pedro Duarte" className="col-span-3" />
-              </div>
-            </div>
-            <DialogFooter>
-              <Button type="submit">Save changes</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-
-      </ContextMenuContent>
-    </ContextMenu>
+    <div>
+      <input type="file" onClick={handlefile} />
+      <button className="text-black border-[1px] border-black rounded-md" onClick={upload}>
+        Upload
+      </button>
+    </div>
   );
-}
-{
-  /*import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
- 
-export function DialogDemo() {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  )
-} */
 }

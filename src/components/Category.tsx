@@ -27,12 +27,17 @@ type gategorytype = {
   createdAt: Date;
   updatedAt: Date;
 };
-type foodtype = gategorytype & {
+type foodtype = {
   _id: string;
   price: number;
   image: string;
   ingredients: string;
-  category: object;
+  category: {
+    _id: string;
+    categoryName: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
   foodName: string;
   createdAt: Date;
   updatedAt: Date;
@@ -241,9 +246,9 @@ export function Foodplus() {
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
-              {food?.filter((food)=> food.category === proms ).map((promss: foodtype, index: number) => {
+              {food?.filter((food)=> food.category._id === proms._id ).map((promss: foodtype, index: number) => {
                 return (
-                  <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap">
+                  <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ml-2">
                     <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ">
                       <Image
                         src={"/Food1.png"}
