@@ -2,7 +2,7 @@
 import { use, useState } from "react";
 
 export default  function ContextMenuDemo() {
-  const [infile, setfile] = useState();
+  const [infile, setfile] = useState("");
   const [image, setimage] = useState()
   const PRESET_NAME = "food-delovery";
   const CLOUDINARYNAME = "dkrwlhgyv";
@@ -39,7 +39,7 @@ export default  function ContextMenuDemo() {
   };
   return (
     <div>
-      <input type="file" onClick={handlefile} />
+      <input type="file" onChange={handlefile} />
       <button className="text-black border-[1px] border-black rounded-md" onClick={upload}>
         Upload
       </button>

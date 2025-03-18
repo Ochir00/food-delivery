@@ -21,6 +21,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import { Addfood } from "./Add-food";
 type gategorytype = {
   _id: string;
   categoryName: string;
@@ -179,7 +180,6 @@ export function Foodplus() {
     const fooddata = await fetch(`http://localhost:4000/food`);
     const foodsdata = await fooddata.json();
     setfood(foodsdata);
-    console.log(foodsdata);
   };
   const createCategory = async () => {
     const response = await fetch("http://localhost:4000/foodcategories", {
@@ -208,7 +208,7 @@ export function Foodplus() {
               {proms.categoryName} {gategory?.length}
             </p>
             <div className="flex flex-wrap">
-              <Dialog>
+              {/* <Dialog>
                 <DialogTrigger asChild>
                   <div className="w-[270px] h-[241px] flex items-center justify-center border-dashed border-2 rounded-[20px]">
                     <div className="w-[40px] h-[40px] rounded-full bg-red-500 flex items-center justify-center ">
@@ -245,7 +245,8 @@ export function Foodplus() {
                     <Button type="submit">Save changes</Button>
                   </DialogFooter>
                 </DialogContent>
-              </Dialog>
+              </Dialog> */}
+              <Addfood categorys={proms} />
               {food?.filter((food)=> food.category._id === proms._id ).map((promss: foodtype, index: number) => {
                 return (
                   <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ml-2">
