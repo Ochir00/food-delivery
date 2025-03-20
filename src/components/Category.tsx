@@ -21,7 +21,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { Addfood } from "./Add-food";
+import { Addfood } from "@/components/Add-food";
 type gategorytype = {
   _id: string;
   categoryName: string;
@@ -246,25 +246,27 @@ export function Foodplus() {
                   </DialogFooter>
                 </DialogContent>
               </Dialog> */}
-              <Addfood categorys={proms}/>
-              {food?.filter((food)=> food.category._id === proms._id ).map((promss: foodtype, index: number) => {
-                return (
-                  <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ml-2">
-                    <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ">
-                      <Image
-                        src={"/Food1.png"}
-                        width={1000}
-                        height={1000}
-                        alt="food"
-                        className="w-[238px] h-[129px] mx-auto rounded-[12px]"
-                      />
-                      <p>{promss.foodName}</p>
-                      <p>{promss.price}</p>
-                      <p>{promss.ingredients}</p>
+              <Addfood categorys={proms} />
+              {food
+                ?.filter((food) => food.category._id === proms._id)
+                .map((promss: foodtype, index: number) => {
+                  return (
+                    <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ml-2">
+                      <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ">
+                        <Image
+                          src={"/Food1.png"}
+                          width={1000}
+                          height={1000}
+                          alt="food"
+                          className="w-[238px] h-[129px] mx-auto rounded-[12px]"
+                        />
+                        <p>{promss.foodName}</p>
+                        <p>{promss.price}</p>
+                        <p>{promss.ingredients}</p>
+                      </div>
                     </div>
-                  </div>
-                )
-              })}
+                  );
+                })}
             </div>
           </div>
         );
