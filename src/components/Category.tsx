@@ -254,7 +254,7 @@ export function Foodplus() {
                     <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ml-2">
                       <div className="w-[270px] h-[241px] rounded-[20px] overflow-hidden border-2 flex flex-wrap ">
                         <Image
-                          src={"/Food1.png"}
+                          src={promss.image}
                           width={1000}
                           height={1000}
                           alt="food"

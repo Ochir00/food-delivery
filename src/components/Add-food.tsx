@@ -19,7 +19,7 @@ type gategorytype = {
   createdAt: Date;
   updatedAt: Date;
 };
-export const Addfood = ({ categorys }: gategorytype) => {
+export const Addfood = ({ categorys }: { categorys: gategorytype }) => {
   const [foodname, setfoodname] = useState("");
   const [price, setprice] = useState();
   const [ingredients, setingredients] = useState("");
@@ -69,13 +69,13 @@ export const Addfood = ({ categorys }: gategorytype) => {
       //   setimageUrl(data.secure_url);
       return data.secure_url;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   };
   const foodUpload = async () => {
-    console.log("100")
+    console.log("100");
     const imageUrl = await uploadImage();
-    console.log("101")
+    console.log("101");
     const response = await fetch("http://localhost:4000/food", {
       method: "POST",
       headers: {

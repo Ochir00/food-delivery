@@ -22,14 +22,6 @@ const formSchema = z.object({
   password: z.string().min(6).max(15),
   confirm: z.string().min(6).max(15),
 });
-//
-//
-//
-//
-//
-//
-//
-//
 export const RegisterEmail = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,8 +30,6 @@ export const RegisterEmail = () => {
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
   return (
@@ -87,6 +77,7 @@ export const RegisterEmail = () => {
 //
 //
 //
+
 export const RegisterPassword = () => {
 
   const [showPassword, setShowPassword] = useState(false);
